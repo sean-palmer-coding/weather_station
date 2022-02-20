@@ -1,14 +1,17 @@
 from django.shortcuts import render
+import json
 from .models import Measurement
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework import status
+from rest_framework.response import Response
+from datetime import datetime, timedelta
 from . import serializers as s
 
 # Create your views here.
-
+TIME_DELTA = timedelta(days=2)
 
 class IndexView(TemplateView):
     template_name = 'base/index.html'
@@ -28,4 +31,9 @@ def measurement_api(request):
             measurement_serializer.save()
             return JsonResponse(measurement_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(measurement_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'GET':
+        measurements = Measurement.objects.filter(current_time__gt=datetime.now() - TIME_DELTA).order_by('-current_time')
+        measurement_serializer = s.MeasurementSerializerGet(measurements, many=True)
+        return Response(measurement_serializer.data)
+
 

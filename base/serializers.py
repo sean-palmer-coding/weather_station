@@ -13,4 +13,4 @@ class MeasurementSerializerGet(serializers.ModelSerializer):
 
     class Meta:
         model = models.Measurement
-        fields = '__all__'
+        exclude = ('id', )

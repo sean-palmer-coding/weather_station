@@ -6,6 +6,8 @@ from django.utils import timezone
 
 class Measurement(models.Model):
     current_time = models.DateTimeField(default=timezone.now)
+    wind_speed = models.IntegerField()
+    wind_direction = models.IntegerField()
     temperature = models.IntegerField()
     humidity = models.IntegerField()
     pressure = models.FloatField()

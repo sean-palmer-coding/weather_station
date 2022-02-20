@@ -1,0 +1,400 @@
+html {
+    --startRotation: 0deg;
+    --endRotation: 0deg;
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-x: hidden;
+}
+
+#flex-div{
+    display: flex;
+}
+
+#flex-div-inner-compass {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+body{
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-x: hidden;
+}
+
+.main-card {
+    background-color: #5c9be5;
+    height: 90vh;
+    width: 150%;
+    /*margin-left: 2vw;*/
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    border-radius: 4vh;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    padding-right: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card{
+    height: 90vh;
+    margin-top: 4vh;
+    width: 100%;
+    /*margin-left: -31vw;*/
+    background-color: #e2effe;
+    border-radius: 4vh;
+    padding: 4vh;
+}
+
+#temp-wrap {
+    margin-top: 8vh;
+    text-align: center;
+    color: white;
+    display: flex;
+}
+
+#preferences{
+    height: 8vh;
+}
+
+.main-card-value{
+    display: flex;
+    width: 100%;
+}
+
+#conditions {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#temp{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 7.5rem;
+}
+
+#location-wrap, #date-wrap{
+    color: white;
+}
+#conditions-wrap{
+    text-align: center;
+    color: white;
+}
+
+#location, #date, #conditions {
+    font-size: .75rem;
+}
+
+.inner-card{
+    width: 97%;
+    height: 30vh;
+    border-radius: 3vh;
+    margin: 4vh auto;
+    background-color: white;
+    position: relative;
+    padding: 2vh;
+
+}
+
+.current-weather-card{
+    width: 90%;
+    height: 45%;
+    background-color: white;
+    border-radius: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5vh;
+}
+
+.current-conditions{
+    height: 35vh;
+    width: 100%;
+}
+
+#weather-chart{
+    height: 28vh;
+    width: 100%;
+}
+
+.linear-gauge {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.weather-value{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 1vw;
+    padding-top: 1vh;
+}
+
+#humidity-value {
+    margin: auto;
+    font-size: 2rem;
+}
+
+#humidity-gauge {
+    padding-top: 2vh;
+}
+
+.gauge-body {
+    width: 100%;
+    height: 2vh;
+    margin: auto;
+    background: lightgray;
+    border-radius: 2vh;
+}
+
+.gauge-fill {
+    height: 100%;
+    transition: width 500ms ease-in-out, background-color 500ms ease-in-out;
+    border-radius: 2vh;
+    background: #5c9be5;
+    display: flex;
+    font-size: .7rem;
+    color: white;
+    justify-content: center;
+}
+
+.gauge-ticks{
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tick {
+    display: flex;
+    margin: auto;
+    width: 33%;
+}
+
+.tick span{
+    margin: auto;
+}
+
+.compass {
+    width: 7vh;
+    height: 7vh;
+    aspect-ratio: 1 !important;
+    border: .5rem solid lightgray;
+    border-radius: 5vw;
+    margin: auto;
+}
+
+.pmgauge {
+    padding-top: .5vh;
+    padding-bottom: .5vh;
+    width: 70%;
+    margin-right: 0;
+}
+
+.pmgauge .gauge-body {
+    height: 1.5vh;
+}
+
+.pm-wrapper {
+    display: flex;
+}
+
+.pm-wrapper p {
+    margin: 0;
+    padding-left: 1.5vw;
+}
+
+#air-quality {
+    margin-bottom: 1vh;
+}
+
+#north {
+    margin-bottom: 1.25vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inner-wind-card {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+}
+
+#chevron {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: rotation 500ms ease;
+    animation-fill-mode: forwards;
+}
+
+#chevron img {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    transform: rotate(-45deg);
+    /*left: 1.275vw;*/
+    margin: auto;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(calc(var(--startRotation) + 45deg));
+    }
+    100% {
+        transform: rotate(calc(var(--endRotation) + 45deg));
+    }
+}
+
+#wind-speed {
+    margin: -85% 30% auto;
+    text-align: center;
+}
+
+.compass sub{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 140%;
+}
+
+#uv-index-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+#uv-index {
+    width: 15%;
+}
+
+#uv-index .gauge-body {
+    height: 1.5vh;
+}
+
+#uv-index-wrapper p {
+    margin: auto;
+}
+
+#uv-index-value {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    width: 60%;
+}
+
+#uv-index-value h3 {
+    margin-left: auto;
+    padding-right: .75vw;
+}
+
+#uv-index-value h6 {
+    margin-right: auto;
+    padding-top: .75vh;
+}
+
+.mini-chart-container {
+    width: 60%;
+    height: 90%;
+    padding-left: 5%;
+}
+
+.pressure-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.pressure-value-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.pressure-value-area h4, .pressure-value-area p {
+    margin: auto;
+}
+
+.wind-graph-wrapper {
+    width: 60%;
+}
+
+#compass-wrapper {
+    padding-left: 2vw;
+    padding-bottom: 1.5vh;
+}
+
+.precip-wrapper {
+    height: 9vh
+}
+
+.info-card h3, .info-card h5 {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+@media screen and (max-width: 992px) {
+
+    .main-card{
+        width: 100%;
+        padding-right: 2vw;
+        height: auto;
+        padding-bottom: 12vh;
+        margin-bottom: 0;
+        margin-top: 1vh;
+    }
+    .info-card {
+        margin-top: -8vh;
+        height: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+    .current-conditions{
+        height: auto;
+        margin: auto;
+    }
+    #compass-wrapper{
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .compass{
+        height: 10vh;
+        width: 10vh;
+        border-radius: 6vh;
+    }
+    .wind-card{
+        height: 60%;
+    }
+    .inner-wind-card{
+        /*flex-direction: column;*/
+    }
+    .pressure-card{
+        height: 30%;
+    }
+    .gauge-fill {
+        font-size: .5rem;
+    }
+    .col-lg-4{
+        padding: 0;
+    }
+    #graph-card{
+        width: 90%;
+    }
+
+
+}

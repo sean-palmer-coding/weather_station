@@ -6,12 +6,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Index</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'base/css/index.css' %}">
 </head>
 <body>
-<div class="main-card">
+<div class="container-fluid">
+<div class="row">
+    <div class="col-lg-3 col-md-12">
+        <div class="main-card">
+            <div class="main-card-value" id="preferences">
 
+            </div>
+            <div class="main-card-value" id="location-wrap">
+                <h3 id="location">Spokane, Washington State, USA</h3>
+            </div>
+            <div class="main-card-value" id="date-wrap">
+                <h3 id="date">Sunday, January 1st, 2022</h3>
+            </div>
+            <div class="main-card-value" id="temp-wrap">
+                <h3 id="temp">{{ Data.temperature }}°</h3>
+            </div>
+            <div class="main-card-value" id="conditions-wrap">
+                <h3 id="conditions">PlaceHolder</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-12">
+        <div class="info-card">
+        <h3>Welcome Back!</h3>
+        <h5>Check out today's weather information</h5>
+        <div class="inner-card" id="graph-card">
+            <canvas id="weather-chart" height="26vh" width="100%"></canvas>
+        </div>
+        <h5>Current Conditions</h5>
+        <div class="current-conditions row">
+            <div class="col-lg-4">
+                <div class="current-weather-card">
+                    <div class="weather-value">
+                        <h6>Humidity</h6>
+                        <h3 id="humidity-value">{{ Data.humidity }}%</h3>
+                    </div>
+
+                    <div class="linear-gauge" id="humidity-gauge">
+                        <div class="gauge-body">
+                            <div class="gauge-fill" id="humidity" style="width: {{ Data.humidity }}%">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-ticks">
+                        <div class="tick">
+                            <span>|</span> Drier
+                        </div>
+                        <div class="tick">
+                            <span>|</span>
+                        </div>
+                        <div class="tick">
+                            Humid <span>|</span>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="current-weather-card" id="uv-index-card">
+                    <div class="weather-value">
+                        <h6>UV Index</h6>
+                        <div id="uv-index-value">
+                            <h3 id="uv-index-number">4</h3>
+                            <h6 id="uv-index-cat">medium</h6>
+                        </div>
+                    </div>
+                    <div id="uv-index-wrapper">
+                        <p>0 - 3</p>
+                        <p>4 - 6</p>
+                        <p>7 - 9</p>
+                        <p>10 - 12</p>
+                        <p>12+</p>
+                    </div>
+                    <div id="uv-index-wrapper">
+                        <div class="linear-gauge" id="uv-index">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="uv-index-fill-1" style="width: {{ Data.humidity }}%">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="linear-gauge" id="uv-index">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="uv-index-fill-2" style="width: {{ Data.humidity }}%">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="linear-gauge" id="uv-index">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="uv-index-fill-3" style="width: {{ Data.humidity }}%">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="linear-gauge" id="uv-index">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="uv-index-fill-4" style="width: {{ Data.humidity }}%">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="linear-gauge" id="uv-index">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="uv-index-fill-5" style="width: {{ Data.humidity }}%">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="current-weather-card wind-card">
+                    <div class="weather-value">
+                        <h6>Wind</h6>
+                    </div>
+                    <div class="inner-wind-card">
+                        <div class="mini-chart-container">
+                            <canvas id="wind-chart"></canvas>
+                        </div>
+                        <div id="compass-wrapper">
+                        <div id="flex-div"><p id="north">N</p></div>
+                        <div class="compass">
+                            <div id="chevron">
+                                <img src="{% static "img/chevron-down (1).svg" %}" alt="chevron" width="24px" height="24px">
+                            </div>
+                            <div id="flex-div-inner-compass">
+                                <h6 id="wind-speed">{{ Data.wind_speed }}</h6><sub>mph</sub>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="current-weather-card pressure-card">
+                    <div class="weather-value">
+                        <h6>Pressure</h6>
+                    </div>
+                    <div class="pressure-wrapper">
+                        <div class="mini-chart-container">
+                            <canvas id="pressure-chart"></canvas>
+                        </div>
+                        <div class="pressure-value-area">
+                            <h4>1000</h4>
+                            <p>Hpa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="current-weather-card">
+                    <div class="weather-value" id="air-quality">
+                        <h6>Air quality</h6>
+                    </div>
+                    <div class="pm-wrapper">
+                        <p>PM<sub>1.0</sub></p>
+                        <div class="linear-gauge pmgauge">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="pm10" style="width: 0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pm-wrapper">
+                        <p>PM<sub>2.5</sub></p>
+                        <div class="linear-gauge pmgauge">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="pm25" style="width: 0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pm-wrapper">
+                        <p>PM<sub>10.0</sub></p>
+                        <div class="linear-gauge pmgauge" >
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="pm100" style="width: 0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-weather-card">
+                    <div class="weather-value" id="air-quality">
+                        <h6>Precipitation</h6>
+                    </div>
+                    <div class="precip-wrapper"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
 </div>
-<h3 id="temp">{{ Data.temperature }}</h3>
-<script src="{% static 'base/weather.js' %}"></script>
+</div>
+<script src="{% static 'base/js/weather.js' %}"></script>
 </body>
 </html>
